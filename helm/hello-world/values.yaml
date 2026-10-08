@@ -1,0 +1,29 @@
+replicaCount: 2
+
+image:
+  repository: hello-world
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 3000
+  
+
+# Non-sensitive variables → ConfigMap
+env:
+  APP_NAME: "hello-world"
+  PORT: "3000"
+
+# Sentitive variables → Secret
+secretEnv:
+  SECRET_FAVORITE_COLOR: "purple"
+
+# Resources → Deployment
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
